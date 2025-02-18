@@ -5,42 +5,52 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Rifa Espingarda Cometa 220</title>
     <style>
-        body {
-            font-family: Arial, sans-serif;
+        * {
             margin: 0;
             padding: 0;
-            background-color: #f7f7f7;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
+            box-sizing: border-box;
         }
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f7f7f7;
+        }
+
+        header {
+            background-color: #007bff;
+            color: white;
+            padding: 15px;
+            text-align: center;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+        }
+
+        header h1 {
+            font-size: 24px;
+        }
+
         .container {
+            margin-top: 80px; /* Para dar espaço ao cabeçalho fixo */
             background-color: white;
             padding: 20px;
             border-radius: 10px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
             width: 100%;
-            max-width: 600px; /* Limite de largura para telas grandes */
+            max-width: 600px;
+            margin: 20px auto;
             text-align: center;
-            margin: 20px;
         }
-        h1 {
-            color: #333;
-            font-size: 24px;
-            margin-bottom: 10px;
-        }
-        p {
-            font-size: 14px;
-            color: #555;
-            margin-bottom: 20px;
-        }
+
         .button-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(50px, 1fr)); /* Botões flexíveis */
+            grid-template-columns: repeat(auto-fill, minmax(50px, 1fr));
             gap: 10px;
             margin-bottom: 20px;
         }
+
         .button-grid button {
             width: 50px;
             height: 50px;
@@ -50,17 +60,21 @@
             cursor: pointer;
             transition: background-color 0.3s;
         }
+
         .button-grid button.available {
             background-color: #28a745;
             color: white;
         }
+
         .button-grid button.unavailable {
             background-color: #dc3545;
             color: white;
         }
+
         .button-grid button.selected {
             background-color: #218838;
         }
+
         .btn {
             background-color: #007bff;
             color: white;
@@ -72,26 +86,30 @@
             margin-top: 20px;
             width: 100%;
         }
+
         .btn:hover {
             background-color: #0056b3;
         }
 
+        .footer {
+            text-align: center;
+            font-size: 14px;
+            margin-top: 20px;
+            color: #555;
+        }
+
         /* Estilos para dispositivos móveis */
         @media (max-width: 768px) {
-            h1 {
-                font-size: 20px;
-            }
-            p {
-                font-size: 12px;
-            }
             .button-grid {
                 grid-template-columns: repeat(4, 1fr); /* 4 colunas em telas pequenas */
             }
+
             .button-grid button {
                 width: 40px;
                 height: 40px;
                 font-size: 14px;
             }
+
             .btn {
                 font-size: 14px;
                 padding: 10px 20px;
@@ -103,11 +121,13 @@
             .button-grid {
                 grid-template-columns: repeat(10, 1fr); /* 10 colunas em telas grandes */
             }
+
             .button-grid button {
                 width: 60px;
                 height: 60px;
                 font-size: 18px;
             }
+
             .btn {
                 font-size: 18px;
                 padding: 15px 30px;
@@ -117,23 +137,26 @@
 </head>
 <body>
 
-    <div class="container">
+    <header>
         <h1>Rifa Espingarda Cometa 220</h1>
-        <p>Escolha seus números para participar da rifa e concorrer a uma espingarda de pressão Cometa 220, com bolsa e 4 caixas de chumbo!</p>
-        
+    </header>
+
+    <div class="container">
+        <h2>Escolha seus números</h2>
+        <p>Participe da rifa e concorra a uma espingarda de pressão Cometa 220, com bolsa e 4 caixas de chumbo!</p>
+
         <div class="button-grid">
             <!-- Botões gerados dinamicamente -->
         </div>
 
         <button class="btn" onclick="confirmarEscolha()">Confirmar Escolha</button>
 
-        <p>O pagamento pode ser feito via <strong>PIX</strong>, chave: [45999170552].</p>
+        <p class="footer">O pagamento pode ser feito via <strong>PIX</strong>, chave: [45999170552].</p>
     </div>
 
     <script>
         let numerosSelecionados = [];
         
-        // Obtém os números indisponíveis da URL
         const urlParams = new URLSearchParams(window.location.search);
         const numerosIndisponiveis = urlParams.get('indisponiveis') ? urlParams.get('indisponiveis').split(',') : [];
 
