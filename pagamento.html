@@ -34,14 +34,14 @@
 
         .container {
             margin-top: 80px; /* Para dar espaço ao cabeçalho fixo */
-            text-align: center;
             background-color: white;
-            padding: 30px;
+            padding: 50px;
             border-radius: 10px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
             width: 100%;
-            max-width: 600px;
-            margin: 20px auto;
+            max-width: 800px;
+            margin: 45px auto;
+            text-align: center;
         }
 
         .qr-code {
@@ -108,7 +108,7 @@
     <div class="container">
         <h2>Pagamento Confirmado</h2>
         <p>Você escolheu os números: <span id="numerosEscolhidos"></span></p>
-        <p>Valor total: R$ <span id="valorTotal"></span></p>
+        <p>Valor Total: R$ <span id="valorTotal"></span></p>
 
         <div class="qr-code" id="qrCodeContainer"></div>
 
@@ -148,7 +148,7 @@
             document.getElementById('pixInfo').style.display = 'block';
 
             // Enviar um aviso para o vendedor (simulado com alert)
-            alert(`Você recebeu uma compra com os números: ${numerosEscolhidos.join(', ')}. Valor total: R$ ${valorTotal}`);
+            alert(`Você recebeu uma compra com os números: ${numerosEscolhidos.join(', ')}.\n Valor Total: R$ ${valorTotal}`);
         }
     </script>
 
