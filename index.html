@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rifa Espingarda Cometa 220</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f7f7f7;
+        }
+        .container {
+            text-align: center;
+            background-color: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 600px;
+        }
+        h1 {
+            color: #333;
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+        .button-grid {
+            display: grid;
+            grid-template-columns: repeat(10, 1fr);
+            gap: 8px;
+            margin-bottom: 20px;
+        }
+        .button-grid button {
+            width: 40px;
+            height: 40px;
+            font-size: 16px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        .button-grid button.available {
+            background-color: #28a745;
+            color: white;
+        }
+        .button-grid button.unavailable {
+            background-color: #dc3545;
+            color: white;
+        }
+        .button-grid button.selected {
+            background-color: #218838;
+        }
+        p {
+            font-size: 14px;
+            color: #555;
+        }
+        .btn {
+            background-color: #007bff;
+            color: white;
+            padding: 12px 24px;
+            font-size: 16px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 20px;
+        }
+        .btn:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>Rifa Espingarda Cometa 220</h1>
+        <p>Escolha seus números para participar da rifa e concorrer a uma espingarda de pressão Cometa 220, com bolsa e 4 caixas de chumbo!</p>
+        
+        <div class="button-grid">
+            <!-- Botões gerados dinamicamente -->
+        </div>
+
+        <button class="btn" onclick="confirmarEscolha()">Confirmar Escolha</button>
+
+        <p>O pagamento pode ser feito via <strong>PIX</strong>, chave: [45999170552].</p>
+    </div>
+
+    <script>
+        let numerosSelecionados = [];
+        
+        // Obtém os números indisponíveis da URL
+        const urlParams = new URLSearchParams(window.location.search);
+        const numerosIndisponiveis = urlParams.get('indisponiveis') ? urlParams.get('indisponiveis').split(',') : [];
+
+        function selecionarNumero(numero) {
+            const botao = document.getElementById('btn' + numero);
+            if (botao.classList.contains('unavailable')) {
+                alert("Esse número está indisponível. Por favor, escolha outro.");
+                return;
+            }
+
+            if (botao.classList.contains('selected')) {
+                botao.classList.remove('selected');
+                numerosSelecionados = numerosSelecionados.filter(num => num !== numero);
+            } else {
+                botao.classList.add('selected');
+                numerosSelecionados.push(numero);
+            }
+        }
+
+        function confirmarEscolha() {
+            if (numerosSelecionados.length === 0) {
+                alert("Por favor, escolha ao menos um número.");
+                return;
+            }
+
+            const valorTotal = numerosSelecionados.length * 7.99;
+            const valorFormatado = valorTotal.toFixed(2);
+            
+            window.location.href = `pagamento.html?valor=${valorFormatado}&numeros=${numerosSelecionados.join(',')}`;
+        }
+
+        const grid = document.querySelector('.button-grid');
+        for (let i = 1; i <= 150; i++) {
+            const button = document.createElement('button');
+            button.textContent = i;
+            button.id = 'btn' + i;
+
+            if (numerosIndisponiveis.includes(i.toString())) {
+                button.classList.add('unavailable');
+                button.disabled = true;
+            } else {
+                button.classList.add('available');
+                button.onclick = function () { selecionarNumero(i); };
+            }
+
+            grid.appendChild(button);
+        }
+    </script>
+
+</body>
+</html>

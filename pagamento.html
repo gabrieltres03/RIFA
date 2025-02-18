@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pagamento Rifa</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f7f7f7;
+        }
+        .container {
+            text-align: center;
+            background-color: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 600px;
+        }
+        h1 {
+            color: #333;
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+        .qr-code {
+            margin-top: 20px;
+            padding: 20px;
+            background-color: #f0f0f0;
+            border-radius: 10px;
+            display: inline-block;
+        }
+        p {
+            font-size: 16px;
+            color: #555;
+        }
+        .btn {
+            background-color: #007bff;
+            color: white;
+            padding: 12px 24px;
+            font-size: 16px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 20px;
+        }
+        .btn:hover {
+            background-color: #0056b3;
+        }
+        .pix-info {
+            display: none;
+            margin-top: 20px;
+        }
+        .pix-key {
+            font-weight: bold;
+            color: #007bff;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>Pagamento - Rifa</h1>
+        <p>Você escolheu os números: <span id="numerosEscolhidos"></span></p>
+        <p>Valor total: R$ <span id="valorTotal"></span></p>
+
+        <div class="qr-code" id="qrCodeContainer"></div>
+
+        <button class="btn" onclick="confirmarPagamento()">Confirmar Pagamento</button>
+
+        <!-- Chave PIX -->
+        <div class="pix-info" id="pixInfo">
+            <p>Para realizar o pagamento, use a chave PIX abaixo:</p>
+            <p class="pix-key" id="pixChave">45999170552</p>
+            <p><b>Atenção!</b></p>
+            <p>Envie o comprovante com os números escolhidos para: 45999170552</p>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/qrcode"></script>
+    <script>
+        // Recupera os parâmetros da URL
+        const urlParams = new URLSearchParams(window.location.search);
+        const valorTotal = urlParams.get('valor');
+        const numerosEscolhidos = urlParams.get('numeros').split(',');
+
+        // Exibe os números escolhidos e o valor total
+        document.getElementById('numerosEscolhidos').textContent = numerosEscolhidos.join(', ');
+        document.getElementById('valorTotal').textContent = valorTotal;
+
+        // Gerar o QR Code para o pagamento PIX
+        const pixChave = "45999170552"; // Substitua pela chave PIX real
+        const qrcodeContainer = document.getElementById('qrCodeContainer');
+        const qrCodeData = `https://api.pagar.me/transactions?pix=true&chave=${pixChave}&valor=${valorTotal}`;
+
+        QRCode.toCanvas(qrcodeContainer, qrCodeData, function (error) {
+            if (error) console.error(error);
+        });
+
+        function confirmarPagamento() {
+            // Exibe a chave PIX
+            document.getElementById('pixInfo').style.display = 'block';
+
+            // Enviar um aviso para o vendedor (simulado com alert)
+            alert(`Você recebeu uma compra com os números: ${numerosEscolhidos.join(', ')}. Valor total: R$ ${valorTotal}`);
+        }
+    </script>
+
+</body>
+</html>
