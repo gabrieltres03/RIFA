@@ -48,6 +48,7 @@
             border-radius: 5px;
             cursor: pointer;
             margin-top: 20px;
+            width: 100%;
         }
         .btn:hover {
             background-color: #0056b3;
@@ -59,6 +60,34 @@
         .pix-key {
             font-weight: bold;
             color: #007bff;
+        }
+
+        /* Estilos para dispositivos móveis */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 20px;
+            }
+            p {
+                font-size: 14px;
+            }
+            .qr-code {
+                padding: 10px;
+            }
+            .btn {
+                font-size: 14px;
+                padding: 10px 20px;
+            }
+        }
+
+        /* Estilos para telas maiores */
+        @media (min-width: 1024px) {
+            .qr-code {
+                padding: 20px;
+            }
+            .btn {
+                font-size: 18px;
+                padding: 15px 30px;
+            }
         }
     </style>
 </head>
