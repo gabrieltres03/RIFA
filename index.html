@@ -21,24 +21,24 @@
             border-radius: 10px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
             width: 100%;
-            max-width: 480px; /* Ajuste para telas menores */
-            margin: 0 20px;
+            max-width: 720px; /* Max largura aumentada para desktops */
+            margin: 20px;
         }
         h1 {
             color: #333;
-            font-size: 22px; /* Tamanho menor para h1 */
-            margin-bottom: 15px;
+            font-size: 24px;
+            margin-bottom: 20px;
         }
         .button-grid {
             display: grid;
-            grid-template-columns: repeat(5, 1fr); /* 5 colunas para dispositivos pequenos */
-            gap: 6px;
+            grid-template-columns: repeat(5, 1fr); /* Para dispositivos pequenos */
+            gap: 10px;
             margin-bottom: 20px;
         }
         .button-grid button {
-            width: 40px;
-            height: 40px;
-            font-size: 14px; /* Tamanho de fonte ajustado */
+            width: 50px; /* Aumenta o tamanho do botão */
+            height: 50px;
+            font-size: 16px; /* Aumenta o texto */
             border: 1px solid #ddd;
             border-radius: 5px;
             cursor: pointer;
@@ -62,28 +62,33 @@
         .btn {
             background-color: #007bff;
             color: white;
-            padding: 10px 20px;
-            font-size: 14px;
+            padding: 12px 24px;
+            font-size: 16px;
             border: none;
             border-radius: 5px;
             cursor: pointer;
             margin-top: 20px;
-            width: 100%; /* Botão de confirmação ocupa toda a largura */
+            width: 100%;
         }
         .btn:hover {
             background-color: #0056b3;
         }
 
-        /* Responsividade para telas maiores */
+        /* Estilo para telas grandes */
         @media (min-width: 768px) {
             .button-grid {
                 grid-template-columns: repeat(10, 1fr); /* 10 colunas para telas maiores */
             }
             h1 {
-                font-size: 24px; /* Aumenta o tamanho do título em telas grandes */
+                font-size: 28px; /* Aumenta o título para telas grandes */
             }
             .btn {
-                font-size: 16px; /* Ajuste do tamanho do botão em telas grandes */
+                font-size: 18px; /* Aumenta o texto do botão para telas grandes */
+            }
+            .button-grid button {
+                width: 60px; /* Aumenta os botões para telas grandes */
+                height: 60px;
+                font-size: 18px; /* Aumenta o texto para telas grandes */
             }
         }
     </style>
