@@ -5,16 +5,35 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Pagamento Rifa</title>
     <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
         body {
             font-family: Arial, sans-serif;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            margin: 0;
             background-color: #f7f7f7;
         }
+
+        header {
+            background-color: #007bff;
+            color: white;
+            padding: 15px;
+            text-align: center;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+        }
+
+        header h1 {
+            font-size: 24px;
+        }
+
         .container {
+            margin-top: 80px; /* Para dar espaço ao cabeçalho fixo */
             text-align: center;
             background-color: white;
             padding: 30px;
@@ -22,12 +41,9 @@
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
             width: 100%;
             max-width: 600px;
+            margin: 20px auto;
         }
-        h1 {
-            color: #333;
-            font-size: 24px;
-            margin-bottom: 20px;
-        }
+
         .qr-code {
             margin-top: 20px;
             padding: 20px;
@@ -35,10 +51,12 @@
             border-radius: 10px;
             display: inline-block;
         }
+
         p {
             font-size: 16px;
             color: #555;
         }
+
         .btn {
             background-color: #007bff;
             color: white;
@@ -48,15 +66,17 @@
             border-radius: 5px;
             cursor: pointer;
             margin-top: 20px;
-            width: 100%;
         }
+
         .btn:hover {
             background-color: #0056b3;
         }
+
         .pix-info {
             display: none;
             margin-top: 20px;
         }
+
         .pix-key {
             font-weight: bold;
             color: #007bff;
@@ -64,15 +84,6 @@
 
         /* Estilos para dispositivos móveis */
         @media (max-width: 768px) {
-            h1 {
-                font-size: 20px;
-            }
-            p {
-                font-size: 14px;
-            }
-            .qr-code {
-                padding: 10px;
-            }
             .btn {
                 font-size: 14px;
                 padding: 10px 20px;
@@ -81,9 +92,6 @@
 
         /* Estilos para telas maiores */
         @media (min-width: 1024px) {
-            .qr-code {
-                padding: 20px;
-            }
             .btn {
                 font-size: 18px;
                 padding: 15px 30px;
@@ -93,8 +101,12 @@
 </head>
 <body>
 
-    <div class="container">
+    <header>
         <h1>Pagamento - Rifa</h1>
+    </header>
+
+    <div class="container">
+        <h2>Pagamento Confirmado</h2>
         <p>Você escolheu os números: <span id="numerosEscolhidos"></span></p>
         <p>Valor total: R$ <span id="valorTotal"></span></p>
 
@@ -123,7 +135,7 @@
         document.getElementById('valorTotal').textContent = valorTotal;
 
         // Gerar o QR Code para o pagamento PIX
-        const pixChave = "45999170552"; // Substitua pela chave PIX real
+        const pixChave = "45999170552";
         const qrcodeContainer = document.getElementById('qrCodeContainer');
         const qrCodeData = `https://api.pagar.me/transactions?pix=true&chave=${pixChave}&valor=${valorTotal}`;
 
